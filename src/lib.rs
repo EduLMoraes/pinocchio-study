@@ -25,7 +25,6 @@ pub fn process_instruction(
         .map(|acc| AccountMeta::new(acc.key(), acc.is_writable(), acc.is_signer()))
         .collect();
 
-
     let accs: Vec<&AccountInfo> = accounts.iter().map(|acc| acc).collect();
 
     let wallet = env::var("WALLET").expect("error to find wallet env");
@@ -43,8 +42,6 @@ pub fn process_instruction(
         ],
         data: &[],
     };
-    
-    
 
     invoke(&ix, &[accs.iter().next().unwrap()])?;
 
