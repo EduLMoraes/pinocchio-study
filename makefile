@@ -6,7 +6,7 @@ deploy:
 	cargo fmt
 	cargo build-sbf
 	cargo test
-	solana program deploy ./target/deploy/pinocchio_study.so ./target/deploy/pinocchio_study-keypayr.json
+	solana program deploy ./target/deploy/pinocchio_study.so
 	solana program show --programs
 
 down:
