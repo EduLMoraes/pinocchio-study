@@ -2,7 +2,7 @@ deploy:
 	git add .
 	git commit -m "$(filter-out $@,$(MAKECMDGOALS))"
 	cargo check
-	cargo fix --lib -p pinocchio_study
+	cargo fix --lib
 	cargo fmt
 	cargo build-sbf
 	cargo test
