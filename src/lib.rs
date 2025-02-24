@@ -42,13 +42,17 @@ pub fn process_instruction(
         ],
         data: &[],
     };
+    let mut iter = accs.into_iter();
+    let accs_invoke = &[
+        iter.next().unwrap(),
+        iter.next().unwrap(),
+        iter.next().unwrap(),
+        iter.next().unwrap(),
+        iter.next().unwrap(),
+        iter.next().unwrap(),
+    ];
 
-    invoke(&ix, &[accs.iter().next().unwrap()])?;
+    invoke(&ix, accs_invoke)?;
 
-    while let Some(account) = accounts.iter().next() {
-        msg!("Conta encontrada...");
-    }
-
-    msg!("Hello from my program!");
     Ok(())
 }
