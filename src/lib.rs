@@ -15,6 +15,7 @@ use state::counter::{CounterAccount, CounterInstruction};
 
 mod create_ata;
 mod state;
+
 entrypoint!(process_instruction);
 
 pub fn process_instruction(
@@ -54,9 +55,9 @@ fn process_initialize_counter(
 
     // Calculate minimum balance for rent exemption
     let rent = Rent::get()?;
-    let required_lamports = rent.minimum_balance(account_space);
+    let _required_lamports = rent.minimum_balance(account_space);
 
-    let ata = AtaCreator::derive_ata(wallet_account.key(), mint_account.key())
+    let _ata = AtaCreator::derive_ata(wallet_account.key(), mint_account.key())
         .expect("Failed to derive ata");
 
     let meta_accounts = &[
@@ -94,7 +95,7 @@ fn process_initialize_counter(
         .expect("Failed to borrorow counter data");
 
     // Serialize the CounterAccount struct into the account's data
-    counter_data.serialize(&mut account_data);
+    let _ = counter_data.serialize(&mut account_data);
 
     msg!("Counter initialized with value: {}", initial_value);
 
@@ -143,9 +144,6 @@ mod test {
         account::Account,
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
-        signature::{Keypair, Signer},
-        system_program,
-        transaction::Transaction,
     };
 
     #[tokio::test]
@@ -168,6 +166,6 @@ mod test {
         let mollusk = Mollusk::new(&program_id, "pinocchio_study");
 
         // Execute the instruction and get the result.
-        let result = mollusk.process_instruction(&instruction, &accounts);
+        let _result = mollusk.process_instruction(&instruction, &accounts);
     }
 }
