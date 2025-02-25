@@ -5,7 +5,7 @@ deploy:
 	cargo fix --lib
 	cargo fmt
 	cargo build-sbf
-	cargo test
+	cargo test-sbf
 	solana program deploy ./target/deploy/pinocchio_study.so
 	solana program show --programs
 

@@ -137,19 +137,23 @@ fn process_increment_counter(program_id: &Pubkey, accounts: &[AccountInfo]) -> P
 
 #[cfg(test)]
 mod test {
+    use mollusk_svm::Mollusk;
     use solana_program_test::*;
     use solana_sdk::{
-        account::Account, instruction::{AccountMeta, Instruction}, pubkey::Pubkey, signature::{Keypair, Signer}, system_program, transaction::Transaction
+        account::Account,
+        instruction::{AccountMeta, Instruction},
+        pubkey::Pubkey,
+        signature::{Keypair, Signer},
+        system_program,
+        transaction::Transaction,
     };
-    use mollusk_svm::Mollusk;
 
     #[tokio::test]
     async fn test_counter_program() {
-        
         let program_id = Pubkey::new_unique();
         let key1 = Pubkey::new_unique();
         let key2 = Pubkey::new_unique();
-        
+
         let instruction = Instruction::new_with_bytes(
             program_id,
             &[],
@@ -158,14 +162,11 @@ mod test {
                 AccountMeta::new_readonly(key2, false),
             ],
         );
-        
-        let accounts = vec![
-            (key1, Account::default()),
-            (key2, Account::default()),
-        ];
-        
+
+        let accounts = vec![(key1, Account::default()), (key2, Account::default())];
+
         let mollusk = Mollusk::new(&program_id, "pinocchio_study");
-        
+
         // Execute the instruction and get the result.
         let result = mollusk.process_instruction(&instruction, &accounts);
     }
