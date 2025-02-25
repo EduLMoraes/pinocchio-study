@@ -1,4 +1,4 @@
-use borsh::{BorshSerialize, BorshDeserialize};
+use borsh::{BorshDeserialize, BorshSerialize};
 use pinocchio::program_error::ProgramError;
 
 // Define struct representing our counter account's data
@@ -26,7 +26,7 @@ impl CounterInstruction {
                 // For InitializeCounter, parse a u64 from the remaining bytes
                 let initial_value = u64::from_le_bytes(
                     rest.try_into()
-                        .map_err(|_| ProgramError::InvalidInstructionData)?
+                        .map_err(|_| ProgramError::InvalidInstructionData)?,
                 );
                 Ok(Self::InitializeCounter { initial_value })
             }
